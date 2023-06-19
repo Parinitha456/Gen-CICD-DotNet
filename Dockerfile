@@ -1,6 +1,6 @@
 
 # Use the official Microsoft .NET SDK image as the base image
-FROM microsoft/setup-msbuild@v1.0.2 AS build
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 
 # Set the working directory inside the container
 WORKDIR /app
