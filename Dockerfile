@@ -5,14 +5,14 @@ FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 # Set the working directory inside the container
 WORKDIR /app
 
+# Copy the source code to the working directory
+COPY . .
+
 # Copy the project file to the working directory
-COPY YourProject.csproj .
+COPY aspnet-get-started/aspnet-get-started.csproj .
 
 # Restore the project dependencies
 RUN dotnet restore
-
-# Copy the source code to the working directory
-COPY . .
 
 # Build the application
 RUN dotnet build --configuration Release --no-restore
