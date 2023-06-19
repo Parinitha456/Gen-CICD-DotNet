@@ -1,4 +1,3 @@
-
 # Use the official Microsoft .NET SDK image as the base image
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 
@@ -12,6 +11,7 @@ COPY . .
 COPY aspnet-get-started/aspnet-get-started.csproj .
 
 # Restore the project dependencies
+RUN apt-get update && apt-get install -y msbuild
 RUN msbuild aspnet-get-started/aspnet-get-started.csproj /t:Restore
 RUN nuget restore aspnet-get-started.sln
 
