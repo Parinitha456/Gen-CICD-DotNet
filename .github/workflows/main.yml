@@ -1,0 +1,17 @@
+name: Build and Test
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - manualTrigger
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Docker build
+      run: docker build -t gen-cicd-dotnet .
