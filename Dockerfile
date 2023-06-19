@@ -1,6 +1,6 @@
 
 # Use the official Microsoft .NET SDK image as the base image
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+FROM microsoft/setup-msbuild@v1.0.2 AS build
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -12,10 +12,12 @@ COPY . .
 COPY aspnet-get-started/aspnet-get-started.csproj .
 
 # Restore the project dependencies
-RUN dotnet restore
+RUN msbuild aspnet-get-started/aspnet-get-started.csproj /t:Restore
+RUN nuget restore aspnet-get-started.sln
+
 
 # Build the application
-RUN dotnet build --configuration Release --no-restore
+RUN msbuild aspnet-get-started/aspnet-get-started.csproj /t:Build /p:Configuration=Release
 
 # Publish the application
 RUN dotnet publish --configuration Release --no-restore --output /app/publish
